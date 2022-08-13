@@ -1,0 +1,88 @@
+@font-face {
+    font-family: 'Montserrat-Regular';
+    src: url(../library/fonts/Montserrat-Regular.ttf);
+}
+
+@font-face {
+    font-family: 'MarcellusSC-Regular';
+    src: url(../library/fonts/MarcellusSC-Regular.ttf);
+}
+
+:root {
+    --misty-rose: rgb(245, 227, 224);
+    --cameo-pink: rgb(232, 180, 188);
+    --middle-purple: rgb(210, 130, 166);
+    --eggplant: rgb(110, 69, 85);
+    --black-coffee: rgb(58, 50, 56);
+}
+
+
+body {
+    font-family: MarcellusSC-Regular;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: auto;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    background-color: var(--middle-purple);
+    width: 100vw;
+    height: 7rem;
+    align-items: center;
+}
+
+.header__left-side {
+    margin-left: 30px;
+}
+
+.header__right-side {
+    margin-right: 30px;
+}
+
+.menu__list {
+    display: flex;
+    gap: 50px;
+}
+
+.menu__list-item {
+    list-style: none;
+}
+
+.menu__link {
+    text-decoration: none;
+    font-size: 1.8rem;
+    color: var(--black-coffee);
+}
+
+.logo a {
+    display: flex;
+    align-items: center;
+    color: var(--black-coffee);
+    font-size: 3rem;
+    font-family: 'MarcellusSC-Regular';
+    text-decoration: none;
+}
+
+.logo__img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+
+.library-content {
+    background-color: var(--misty-rose);
+}
+
+.footer {
+    background-color: var(--black-coffee);
+}
+
+.book-card {
+    width: 2rem;
+    height: 2rem;
+}
