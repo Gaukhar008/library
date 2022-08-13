@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library</title>
+    <link href="normalize.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+</head>
+
+<body>
+    <header class="header">
+        <div class="header__left-side">
+            <div class="logo">
+                <a class="logo__link" href="#">
+                    <img class="logo__img" src="logo.png" alt="logo image">
+                    <div class="logo__description">
+                        My Library
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="header__right-side">
+            <nav class="menu">
+                <ul class="menu__list">
+                    <li class="menu__list-item">
+                        <a class="menu__link" href="">Account</a>
+                    </li>
+                    <li class="menu__list-item">
+                        <a class="menu__link" href="">Log in</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <main class="library-content">
+        <div class="library-content__buttons">
+            <button class="library-content__button library-content__button--blue" >
+                + Add book
+            </button>
+            <button class="library-content__button library-content__button--red">
+                Delete all
+            </button>
+        </div>
+        <div class="statistics">
+            <div class="statistics__item">
+                <div class="statistics__item-description">
+                    Read:    
+                </div>
+                <div class="statistics__item-quantity">
+                    0
+                </div>
+            </div>
+            <div class="statistics__item">
+                <div class="statistics__item-description">
+                    Not read:    
+                </div>
+                <div class="statistics__item-quantity">
+                    0
+                </div>
+            </div>
+            <div class="statistics__item">
+                <div class="statistics__item-description">
+                    Total books:    
+                </div>
+                <div class="statistics__item-quantity">
+                    0
+                </div>
+            </div>
+        </div>
+        <div class="library-content__cards">
+        </div>
+    </main>
+    <footer class="footer">
+        <div class="footer__copyright">
+            Copyright © 2022
+            <a class="footer__github-link" href="https://github.com/Gaukhar008">Gaukhar008</a>
+        </div>
+    </footer>
+
+    <script src="index.js"></script>
+</body>
+
+</html>
