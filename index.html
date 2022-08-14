@@ -39,10 +39,38 @@
     <main class="library-content">
         <div class="library-content__top">
             <div class="library-content__buttons">
-                <button class="library-content__button library-content__button--hover library-content__button--blue">
+                <button class="library-content__button library-content__button--add library-content__button--hover library-content__button--blue">
                     + Add book
                 </button>
-                <button class="library-content__button library-content__button--hover library-content__button--red">
+                <!-- The Modal -->
+                <div class="modal">
+                    <!-- Modal content -->
+                    <div class="modal-content">
+                        <span class="close-element">&times;</span>
+                        <form class="modal-content__form">
+                            <p class="modal-content__description">Add new book</p>
+                            <div class="modal-content__inputs">
+                                <div class="modal-content__input-title">
+                                    <input class="modal-content__input modal-content__input--title modal-content__input--focus" type="text" name="book-title" placeholder="Title" required>
+                                </div>
+                                <div class="modal-content__input-author">
+                                    <input class="modal-content__input modal-content__input--author modal-content__input--focus" type="text" name="book-author" placeholder="Author" required>
+                                </div>
+                                <div class="modal-content__input-pages">
+                                    <input class="modal-content__input modal-content__input--pages modal-content__input--focus" type="number" name="book-pages" placeholder="Number of pages" required>
+                                </div>
+                                <div class="modal-content__input-checkbox">
+                                    <div class="modal-content__input-checkbox">
+                                    <label class="modal-content__input" for="book-read">Have you read it?</label>
+                                    <input class="modal-content__input modal-content__input--checkbox modal-content__input--checked" type="checkbox" id="book-read" name="book-read">
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="modal-content__button modal-content__button--hover" type="button">Submit</button>
+                        </form>
+                    </div>
+                </div>
+                <button class="library-content__button library-content__button--delete library-content__button--hover library-content__button--red">
                     Delete all
                 </button>
             </div>
