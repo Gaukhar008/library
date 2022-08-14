@@ -26,58 +26,63 @@
             <nav class="menu">
                 <ul class="menu__list">
                     <li class="menu__list-item">
-                        <a class="menu__link" href="">Account</a>
+                        <a class="menu__link menu__link--hover" href="">Account</a>
                     </li>
                     <li class="menu__list-item">
-                        <a class="menu__link" href="">Log in</a>
+                        <a class="menu__link menu__link--hover" href="">Log in</a>
                     </li>
                 </ul>
             </nav>
         </div>
     </header>
-    
+
     <main class="library-content">
-        <div class="library-content__buttons">
-            <button class="library-content__button library-content__button--blue" >
-                + Add book
-            </button>
-            <button class="library-content__button library-content__button--red">
-                Delete all
-            </button>
+        <div class="library-content__top">
+            <div class="library-content__buttons">
+                <button class="library-content__button library-content__button--hover library-content__button--blue">
+                    + Add book
+                </button>
+                <button class="library-content__button library-content__button--hover library-content__button--red">
+                    Delete all
+                </button>
+            </div>
+            <div class="statistics">
+                <div class="statistics__item">
+                    <div class="statistics__item-description">
+                        Read:
+                    </div>
+                    <div class="statistics__item-quantity">
+                        0
+                    </div>
+                </div>
+                <div class="statistics__item">
+                    <div class="statistics__item-description">
+                        Not read:
+                    </div>
+                    <div class="statistics__item-quantity">
+                        0
+                    </div>
+                </div>
+                <div class="statistics__item">
+                    <div class="statistics__item-description">
+                        Total books:
+                    </div>
+                    <div class="statistics__item-quantity">
+                        0
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="statistics">
-            <div class="statistics__item">
-                <div class="statistics__item-description">
-                    Read:    
-                </div>
-                <div class="statistics__item-quantity">
-                    0
-                </div>
+        <div class="library-content__bottom">
+            <div class="library-content__cards">
             </div>
-            <div class="statistics__item">
-                <div class="statistics__item-description">
-                    Not read:    
-                </div>
-                <div class="statistics__item-quantity">
-                    0
-                </div>
-            </div>
-            <div class="statistics__item">
-                <div class="statistics__item-description">
-                    Total books:    
-                </div>
-                <div class="statistics__item-quantity">
-                    0
-                </div>
-            </div>
-        </div>
-        <div class="library-content__cards">
         </div>
     </main>
     <footer class="footer">
         <div class="footer__copyright">
             Copyright © 2022
-            <a class="footer__github-link" href="https://github.com/Gaukhar008">Gaukhar008</a>
+            <a class="footer__github-link footer__github-link--hover"
+                href="https://github.com/Gaukhar008">Gaukhar008</a>
         </div>
     </footer>
 
