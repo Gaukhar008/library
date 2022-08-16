@@ -7,9 +7,22 @@ const bookPages = document.querySelector('.modal-content__input--pages');
 const readBook = document.querySelector('.modal-content__input--checkbox');
 const submitBookBtn = document.querySelector('.modal-content__button');
 
+function validateForm() {
+    if(bookTitle.value == '' || bookAuthor.value == '' || bookPages.value == '') {
+        alert('Please fill all the fields!')
+    } else {
+        addBookToLibrary();
+        modal.style.display = 'none';
+        bookTitle.value = '';
+        bookAuthor.value ='';
+        bookPages.value = '';
+        readBook.checked = false;
+        displayBook();
+    }
+}
+
 submitBookBtn.onclick = function() {
-    addBookToLibrary();
-    displayBook();
+    validateForm();
 }
 
 newBookBtn.onclick = function() {
@@ -48,11 +61,11 @@ function addBookToLibrary() {
     myLibrary.push(book);
 };
 
+let i = 0;
 function displayBook() {
-myLibrary.forEach((book) => {
-    let bookCard = createBookCard(book);
-
-});
+    for (; i < myLibrary.length; i++) {
+        createBookCard(myLibrary[i]);
+    };
 };
 
 const createBookCard = (book) => {
@@ -63,7 +76,7 @@ const createBookCard = (book) => {
     let readBook = document.createElement('button');
     let deleteBook = document.createElement('button');
 
-    bookCard.classList.add('book-card');
+    bookCard.innerHTML = `<div class="book-card" data-index="${i}">`; 
     title.classList.add('book-card__item');
     author.classList.add('book-card__item');
     pages.classList.add('book-card__item');
@@ -80,17 +93,10 @@ const createBookCard = (book) => {
         readBook.textContent = 'Not read';
     }
 
-
     document.querySelector('.library-content__cards').appendChild(bookCard);
-    document.querySelector('.book-card').appendChild(title);
-    document.querySelector('.book-card').appendChild(author);
-    document.querySelector('.book-card').appendChild(pages);
-    document.querySelector('.book-card').appendChild(readBook);
-    document.querySelector('.book-card').appendChild(deleteBook);
+    document.querySelector(`[data-index="${i}"]`).appendChild(title);
+    document.querySelector(`[data-index="${i}"]`).appendChild(author);
+    document.querySelector(`[data-index="${i}"]`).appendChild(pages);
+    document.querySelector(`[data-index="${i}"]`).appendChild(readBook);
+    document.querySelector(`[data-index="${i}"]`).appendChild(deleteBook);
 }
-
-function updateBookCard() {
-
-}
-
-createBookCard();
