@@ -99,6 +99,8 @@ body {
     gap: 30px;
 }
 
+
+
 .library-content__buttons {
     display: flex;
     width: 35vw;
@@ -138,8 +140,10 @@ body {
 
 .library-content__cards {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    justify-items: center;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     padding: 30px;
+    gap: 40px;
 }
 
 .book-card {
