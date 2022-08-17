@@ -6,11 +6,37 @@ const bookAuthor = document.querySelector('.modal-content__input--author');
 const bookPages = document.querySelector('.modal-content__input--pages');
 const readBook = document.querySelector('.modal-content__input--checkbox');
 const submitBookBtn = document.querySelector('.modal-content__button');
+const titleValidationText = document.querySelector('.modal-content__validation-title');
+const authorValidationText = document.querySelector('.modal-content__validation-author');
+const pagesValidationText = document.querySelector('.modal-content__validation-pages');
 
 function validateForm() {
-    if(bookTitle.value == '' || bookAuthor.value == '' || bookPages.value == '') {
-        alert('Please fill all the fields!')
+    if (bookTitle.value.trim().length === 0) {
+        titleValidationText.textContent = 'Please fill out this field.';  
     } else {
+        titleValidationText.textContent = '';
+    }
+    if (bookAuthor.value.trim().length === 0) {
+        authorValidationText.textContent = 'Please fill out this field.';
+    } else {
+        authorValidationText.textContent = '';
+    }
+    if (bookPages.value.trim().length === 0 || bookPages.value === '0') {
+        pagesValidationText.textContent = 'Please enter a number bigger than 0.';
+    } else {
+        pagesValidationText.textContent = '';
+    } 
+    if (bookTitle.value.trim().length === 0 || bookAuthor.value.trim().length === 0 || 
+        bookPages.value.trim().length === 0 || bookPages.value === '0') {
+            return false;
+    } else {
+        return true;
+    }
+}   
+
+submitBookBtn.onclick = function() {
+    validateForm();
+    if(validateForm() === true) {
         addBookToLibrary();
         modal.style.display = 'none';
         bookTitle.value = '';
@@ -18,11 +44,7 @@ function validateForm() {
         bookPages.value = '';
         readBook.checked = false;
         displayBook();
-    }
-}
-
-submitBookBtn.onclick = function() {
-    validateForm();
+    }    
 }
 
 newBookBtn.onclick = function() {
