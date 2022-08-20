@@ -28,6 +28,10 @@ body {
     background-color: var(--misty-rose);
 }
 
+button:hover {
+    filter: brightness(85%);
+}
+
 /*HEADER*/
 
 .header {
@@ -103,8 +107,6 @@ main {
     gap: 30px;
 }
 
-
-
 .library-content__buttons {
     display: flex;
     width: 35vw;
@@ -119,10 +121,16 @@ main {
     border: none;
     border-radius: 10px;
     font-size: calc(12px + 1vw);
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
 
-.library-content__button--hover:hover {
+.library-content__button--add {
+    background-color: var(--cameo-pink);
+}
 
+.library-content__button--delete {
+    background-color: var(--eggplant);
+    color: var(--misty-rose);
 }
 
 .statistics {
@@ -161,7 +169,7 @@ main {
     height: 300px;
     border-radius: 15px;
     padding: 25px;
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
 
 .book-card__item {
@@ -178,12 +186,26 @@ main {
 .book-card__read-button {
     cursor: pointer;
     border: none;
-    background-color: var(--cameo-pink);
+}
+
+.book-card__read-button:hover {
+    filter: brightness(90%);
+}
+
+.book-card__read-button--eggplant {
+    background-color: var(--eggplant) !important;
+    color: var(--misty-rose) !important;
+}
+
+.book-card__read-button--cameo-pink {
+    background-color: var(--cameo-pink) !important;
+    color: var(--black-coffee) !important;
 }
 
 .book-card__delete-button {
+    cursor: pointer;
     border: none;
-    background-color: var(--cameo-pink);
+    background-color: #d3d3d3;
 }
 
 /*FOOTER*/
@@ -300,10 +322,6 @@ main {
     background-color:var(--cameo-pink);
     border: none;
     border-radius: 10px;
-}
-
-.modal-content__button--hover:hover {
-    background-color: var(--middle-purple);
 }
 
 .modal-content__input-checkbox {
