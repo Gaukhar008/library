@@ -105,6 +105,7 @@ submitBookBtn.onclick = function () {
         readBook.checked = false;
         displayBook();
         toggleStatus();
+        showStatistics();
     }
 }
 
@@ -147,4 +148,23 @@ function toggleStatus() {
             }
         };
     }
+}
+
+const quantityOfTotalBooks = document.querySelector('.statistics__item-quantity--total');
+const quantityOfReadlBooks = document.querySelector('.statistics__item-quantity--read');
+const quantityOfUnreadBooks = document.querySelector('.statistics__item-quantity--not-read');
+
+function showStatistics() {
+    let readBooks = 0;
+    let unreadBooks = 0;
+    for(const book of myLibrary) {
+        if(book.read == true) {
+            readBooks++;
+        } else if(book.read == false){
+            unreadBooks++;
+        }
+    }
+    quantityOfReadlBooks.textContent = readBooks;
+    quantityOfUnreadBooks.textContent = unreadBooks;
+    quantityOfTotalBooks.textContent = myLibrary.length;
 }
