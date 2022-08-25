@@ -1,26 +1,38 @@
 const modal = document.querySelector('.modal');
 const newBookBtn = document.querySelector('.library-content__button--add');
 const closeModalElem = document.querySelector('.close-element');
-const bookTitle = document.querySelector('.modal-content__input--title');
-const bookAuthor = document.querySelector('.modal-content__input--author');
-const bookPages = document.querySelector('.modal-content__input--pages');
-const readBook = document.querySelector('.modal-content__input--checkbox');
+const title = document.querySelector('.modal-content__input--title');
+const author = document.querySelector('.modal-content__input--author');
+const pages = document.querySelector('.modal-content__input--pages');
+const isRead = document.querySelector('.modal-content__input--checkbox');
 const submitBookBtn = document.querySelector('.modal-content__button');
 const titleValidationText = document.querySelector('.modal-content__validation-title');
 const authorValidationText = document.querySelector('.modal-content__validation-author');
 const pagesValidationText = document.querySelector('.modal-content__validation-pages');
+const cardsContainer = document.querySelector('.library-content__cards');
+const quantityOfTotalBooks = document.querySelector('.statistics__item-quantity--total');
+const quantityOfReadBooks = document.querySelector('.statistics__item-quantity--read');
+const quantityOfUnreadBooks = document.querySelector('.statistics__item-quantity--not-read');
 
 let myLibrary = [];
 
-function Book(title, author, pages, read) {
+function Book(title, author, pages, isRead) {
     this.title = title;
     this.author = author;
     this.pages = pages;
-    this.read = read;
+    this.isRead = isRead;
 };
 
+function getBookFromInput() {
+    let title = document.querySelector('.modal-content__input--title').value;
+    let author = document.querySelector('.modal-content__input--author').value;
+    let pages = document.querySelector('.modal-content__input--pages').value;
+    let isRead = document.querySelector('.modal-content__input--checkbox').checked;
+    return new Book(title, author, pages, isRead);
+}
+
 function addBookToLibrary() {
-    const book = new Book(bookTitle.value, bookAuthor.value, bookPages.value, readBook.checked);
+    let book = getBookFromInput();
     myLibrary.push(book);
 };
 
@@ -32,21 +44,23 @@ const createBookCard = (book) => {
     let readBookBtn = document.createElement('button');
     let deleteBookBtn = document.createElement('button');
 
-    bookCard.innerHTML = `<div class="book-card" data-index="${i}">`;
+    bookCard.classList.add('book-card');
+    bookCard.setAttribute('data-index', myLibrary.indexOf(book));
     title.classList.add('book-card__item');
     author.classList.add('book-card__item');
     pages.classList.add('book-card__item');
     readBookBtn.classList.add('book-card__item');
     readBookBtn.classList.add('book-card__read-button');
-    readBookBtn.type = 'button';
+    readBookBtn.setAttribute('data-index', myLibrary.indexOf(book));
     deleteBookBtn.classList.add('book-card__item');
     deleteBookBtn.classList.add('book-card__delete-button');
+    deleteBookBtn.setAttribute('data-index', myLibrary.indexOf(book));
 
     title.textContent = `"${book.title}"`;
     author.textContent = book.author;
     pages.textContent = `${book.pages} pages`;
     deleteBookBtn.textContent = 'Delete';
-    if (book.read === true) {
+    if (book.isRead === true) {
         readBookBtn.textContent = 'Read';
         readBookBtn.style.backgroundColor = 'rgb(232, 180, 188)';
     } else {
@@ -55,57 +69,55 @@ const createBookCard = (book) => {
         readBookBtn.style.color = '#ffffff';
     }
 
-    document.querySelector('.library-content__cards').appendChild(bookCard);
-    document.querySelector(`[data-index="${i}"]`).appendChild(title);
-    document.querySelector(`[data-index="${i}"]`).appendChild(author);
-    document.querySelector(`[data-index="${i}"]`).appendChild(pages);
-    document.querySelector(`[data-index="${i}"]`).appendChild(readBookBtn);
-    document.querySelector(`[data-index="${i}"]`).appendChild(deleteBookBtn);
+    bookCard.append(title);
+    bookCard.append(author);
+    bookCard.append(pages);
+    bookCard.append(readBookBtn);
+    bookCard.append(deleteBookBtn);
+    cardsContainer.append(bookCard);
 }
 
 function validateForm() {
-    if (bookTitle.value.trim().length === 0) {
+    if (title.value.trim().length === 0) {
         titleValidationText.textContent = 'Please fill out this field.';
     } else {
         titleValidationText.textContent = '';
     }
-    if (bookAuthor.value.trim().length === 0) {
+    if (author.value.trim().length === 0) {
         authorValidationText.textContent = 'Please fill out this field.';
     } else {
         authorValidationText.textContent = '';
     }
-    if (bookPages.value.trim().length === 0 || bookPages.value === '0') {
+    if (pages.value.trim().length === 0 || pages.value === '0') {
         pagesValidationText.textContent = 'Please enter a number bigger than 0.';
     } else {
         pagesValidationText.textContent = '';
     }
-    if (bookTitle.value.trim().length === 0 || bookAuthor.value.trim().length === 0 ||
-        bookPages.value.trim().length === 0 || bookPages.value === '0') {
+    if (title.value.trim().length === 0 || author.value.trim().length === 0 ||
+        pages.value.trim().length === 0 || pages.value === '0') {
         return false;
     } else {
         return true;
     }
 }
 
-let i = 0;
 function displayBook() {
-    for (; i < myLibrary.length; i++) {
-        createBookCard(myLibrary[i]);
-    };
+    createBookCard(myLibrary[myLibrary.length - 1]);
 };
 
 submitBookBtn.onclick = function () {
     validateForm();
     if (validateForm() === true) {
         addBookToLibrary();
-        modal.style.display = 'none';
-        bookTitle.value = '';
-        bookAuthor.value = '';
-        bookPages.value = '';
-        readBook.checked = false;
         displayBook();
-        toggleStatus();
+        modal.style.display = 'none';
+        title.value = '';
+        author.value = '';
+        pages.value = '';
+        isRead.checked = false;
         showStatistics();
+        toggleStatus();
+        deleteBook();
     }
 }
 
@@ -115,56 +127,74 @@ newBookBtn.onclick = function () {
 
 closeModalElem.onclick = function () {
     modal.style.display = 'none';
-    bookTitle.value = '';
-    bookAuthor.value = '';
-    bookPages.value = '';
-    readBook.checked = false;
+    title.value = '';
+    author.value = '';
+    pages.value = '';
+    isRead.checked = false;
+    titleValidationText.textContent = '';
+    authorValidationText.textContent = '';
+    pagesValidationText.textContent = '';
 }
 
 window.onclick = function (event) {
     if (event.target == modal) {
         modal.style.display = 'none';
-        bookTitle.value = '';
-        bookAuthor.value = '';
-        bookPages.value = '';
-        readBook.checked = false;
+        title.value = '';
+        author.value = '';
+        pages.value = '';
+        isRead.checked = false;
+        titleValidationText.textContent = '';
+        authorValidationText.textContent = '';
+        pagesValidationText.textContent = '';
     }
 }
 
 function toggleStatus() {
     const readBookBtns = document.getElementsByClassName('book-card__read-button');
     for (let i = 0; i < readBookBtns.length; i++) {
-        readBookBtns[i].onclick = function() {
-            if(readBookBtns[i].textContent == 'Read') {
+        readBookBtns[i].onclick = function () {
+            if (readBookBtns[i].textContent == 'Read') {
                 readBookBtns[i].textContent = 'Not read';
-                myLibrary[i]['read'] = false;
+                myLibrary[i]['isRead'] = false;
                 readBookBtns[i].classList.remove('book-card__read-button--cameo-pink');
                 readBookBtns[i].classList.add('book-card__read-button--eggplant');
-            } else if(readBookBtns[i].textContent == 'Not read') {
+                showStatistics();
+            } else if (readBookBtns[i].textContent == 'Not read') {
                 readBookBtns[i].textContent = 'Read';
-                myLibrary[i]['read'] = true;
+                myLibrary[i]['isRead'] = true;
                 readBookBtns[i].classList.remove('book-card__read-button--eggplant');
                 readBookBtns[i].classList.add('book-card__read-button--cameo-pink');
+                showStatistics();
             }
         };
     }
 }
 
-const quantityOfTotalBooks = document.querySelector('.statistics__item-quantity--total');
-const quantityOfReadlBooks = document.querySelector('.statistics__item-quantity--read');
-const quantityOfUnreadBooks = document.querySelector('.statistics__item-quantity--not-read');
-
 function showStatistics() {
     let readBooks = 0;
     let unreadBooks = 0;
-    for(const book of myLibrary) {
-        if(book.read == true) {
+    for (let book of myLibrary) {
+        if(book === null) {
+            continue;
+        } else if (book.isRead == true) {
             readBooks++;
-        } else if(book.read == false){
+        } else if (book.isRead == false) {
             unreadBooks++;
-        }
+        } 
     }
-    quantityOfReadlBooks.textContent = readBooks;
+    quantityOfReadBooks.textContent = readBooks;
     quantityOfUnreadBooks.textContent = unreadBooks;
-    quantityOfTotalBooks.textContent = myLibrary.length;
+    quantityOfTotalBooks.textContent = readBooks + unreadBooks;
 }
+
+function deleteBook() {
+    let deleteBtns = document.getElementsByClassName('book-card__delete-button');
+    let array = Array.from(deleteBtns);
+    array.forEach(button => button.onclick = function () {
+        let index = button.getAttribute('data-index');
+        let card = document.querySelector(`[data-index='${index}']`);
+        cardsContainer.removeChild(card);
+        myLibrary[index] = null;
+        showStatistics();
+    });
+};
