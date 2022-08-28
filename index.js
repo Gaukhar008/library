@@ -13,6 +13,7 @@ const cardsContainer = document.querySelector('.library-content__cards');
 const quantityOfTotalBooks = document.querySelector('.statistics__item-quantity--total');
 const quantityOfReadBooks = document.querySelector('.statistics__item-quantity--read');
 const quantityOfUnreadBooks = document.querySelector('.statistics__item-quantity--not-read');
+const deleteAllBooksButton = document.querySelector('.library-content__button--delete');
 
 let myLibrary = [];
 
@@ -198,3 +199,14 @@ function deleteBook() {
         showStatistics();
     });
 };
+
+deleteAllBooksButton.onclick = function() {
+    myLibrary = [];
+    const cards = document.querySelector('.library-content__cards');
+    while(cards.firstChild) {
+        cards.removeChild(cards.lastChild);
+    }
+    quantityOfReadBooks.textContent = 0;
+    quantityOfUnreadBooks.textContent = 0;
+    quantityOfTotalBooks.textContent = 0;
+}
